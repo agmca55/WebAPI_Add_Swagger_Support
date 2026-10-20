@@ -19,11 +19,14 @@ builder.Services.AddOpenApi();
 //Step 0:
 //=======================================================
 //Nuget - Swashbuckle.AspNetCore
+//launchSettings.json - Add following lines in the "profiles" section of your project
+//  "launchBrowser": true,
+//  "launchUrl": "Swagger",
 
 
 //Step 1: Nuget - To Add Swagger - Register the Swagger generator
 //========================================================
-        builder.Services.AddSwaggerGen(); //
+builder.Services.AddSwaggerGen(); //
 
 var appSettingsSection = configuration.GetSection("AppSettings");
 services.Configure<AppSettings>(appSettingsSection);
