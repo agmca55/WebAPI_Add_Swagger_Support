@@ -16,17 +16,20 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+
+//============Swagger===========================================
 //Step 0:
-//=======================================================
+
 //Nuget - Swashbuckle.AspNetCore
 //launchSettings.json - Add following lines in the "profiles" section of your project
 //  "launchBrowser": true,
 //  "launchUrl": "Swagger",
 
 
-//Step 1: Nuget - To Add Swagger - Register the Swagger generator
+//Step 1: Register the Swagger generator
+builder.Services.AddSwaggerGen();
+
 //========================================================
-builder.Services.AddSwaggerGen(); //
 
 var appSettingsSection = configuration.GetSection("AppSettings");
 services.Configure<AppSettings>(appSettingsSection);
@@ -60,8 +63,9 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 
+    //===========Swagger==============================================================================
+
     //Step 2: To Add Swagger - Enable middleware to serve generated Swagger as a JSON endpoint.
-    //=========================================================================================
     app.UseSwagger(); //
 
     //Step 3: To Add Swagger -  Enable middleware to serve Swagger UI
@@ -70,6 +74,7 @@ if (app.Environment.IsDevelopment())
         // Adjust the endpoint path if you are using newer .NET OpenAPI templates
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"); //
     });
+    //==============================================================
 }
 
 app.UseHttpsRedirection();
